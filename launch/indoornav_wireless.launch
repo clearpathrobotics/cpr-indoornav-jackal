@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<launch>
+  <node ns="export/rocksteady/wireless" pkg="wireless_watcher" name="indoornav_wireless_watcher" type="watcher_node" />
+</launch>

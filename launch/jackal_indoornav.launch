@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<launch>
+  <group if="$(optenv INDOORNAV_ENABLE_ROS2_TO_ROS1_BRIDGE 0)">
+    <include file="$(find cpr_indoornav_base)/launch/api_bridge.launch" />
+  </group>
+
+  <include file="$(find cpr_indoornav_base)/launch/start_indoornav_remote.launch">
+    <arg name="platform" value="jackal" />
+  </include>
+</launch>

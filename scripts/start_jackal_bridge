@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# By default we use Foxy, but we can optionally use Galactic or Rolling too
+if [ -z "$ROS2_DISTRO" ];
+then
+  ROS2_DISTRO="foxy"
+fi
+
+# load the ROS1 environment
+source /etc/ros/setup.bash
+
+# load the topic parameters into the rosparam server
+roslaunch --wait cpr_indoornav_jackal load_bridge_params.launch
+
+# load the ROS2 environment
+source /opt/ros/$ROS2_DISTRO/setup.bash
+
+# load the Clearpath/OTTO Motors ROS2 API
+# Automatically use the latest version
+if [ -d /opt/clearpath ];
+then
+  CLEARPATH_API_VERSION=$(ls -r /opt/clearpath/ | grep ros2 | head -1)
+  if ! [ -z "$CLEARPATH_API_VERSION" ];
+  then
+    source /opt/clearpath/${CLEARPATH_API_VERSION}/setup.bash
+  fi
+fi
+
+# if the ros1_bridge package has been built from source it may be in a custom workspace
+# so source that too
+if [ -z "$BRIDGE_SETUP_PATH" ];
+then
+  source $BRIDGE_SETUP_PATH
+fi
+
+# set the ROS2 domain, other necessary envars
+export ROS_DOMAIN_ID=121
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+export CYCLONEDDS_URI=file://$(catkin_find cpr_indoornav_base config/cyclone_dds.xml --first-only)
+
+# start the bridge for this domain
+ros2 run ros1_bridge parameter_bridge __name:=jackal_bridge __node:=jackal_bridge __ns:=jackal_api

@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<launch>
+  <!--
+    Relay sensor data from the root namespace to a hostname-derived namespace to reduce
+    the risk of accidentally clobbering anything when we use the ros1_bridge
+  -->
+  <!-- lidar data -->
+  <node name="front_scan__relay" pkg="topic_tools" type="relay" args="/front/scan /$(env HOSTNAME_ROS_SANITIZED)/front/scan" />
+  <node name="rear_scan__relay" pkg="topic_tools" type="relay" args="/rear/scan /$(env HOSTNAME_ROS_SANITIZED)/rear/scan" />
+  <!--<node name="velodyne_points__relay" pkg="topic_tools" type="relay" args="/velodyne_points /$(env HOSTNAME_ROS_SANITIZED)/velodyne_points" />-->
+
+  <!-- IMU data -->
+  <node name="imu_data__relay" pkg="topic_tools" type="relay" args="/imu/data /$(env HOSTNAME_ROS_SANITIZED)/imu/data" />
+  <group if="$(optenv INDOORNAV_IMU_GX5 0)">
+    <node name="gx5_imu_data__relay" pkg="topic_tools" type="relay" args="/gx5/imu/data /$(env HOSTNAME_ROS_SANITIZED)/gx5/imu/data" />
+  </group>
+  <group unless="$(optenv INDOORNAV_IMU_GX5 0)">
+    <node name="um7_imu_data__relay" pkg="topic_tools" type="relay" args="/um7/imu/data /$(env HOSTNAME_ROS_SANITIZED)/um7/imu/data" />
+  </group>
+
+  <!-- GPS data -->
+  <node name="navsat_fix__relay" pkg="topic_tools" type="relay" args="/navsat/fix /$(env HOSTNAME_ROS_SANITIZED)/navsat/fix" />
+
+  <!-- Battery status -->
+  <node name="battery_status__relay" pkg="topic_tools" type="relay" args="/export/rocksteady/bms/battery_status /$(env HOSTNAME_ROS_SANITIZED)/battery_status" />
+
+  <!-- Wireless -->
+  <node name="wireless_connection__relay" pkg="topic_tools" type="relay" args="/export/rocksteady/wireless/connection /$(env HOSTNAME_ROS_SANITIZED)/wireless/connection" />
+  <node name="wireless_connected__relay" pkg="topic_tools" type="relay" args="/wifi_connected /$(env HOSTNAME_ROS_SANITIZED)/wireless/connected" />
+
+  <!-- Game controller -->
+  <node name="bluetooth_teleop_joy__relay" pkg="topic_tools" type="relay" args="/bluetooth_teleop/joy /$(env HOSTNAME_ROS_SANITIZED)/bluetooth_teleop/joy" />
+</launch>

@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<launch>
+  <node name="indoornav_jackal_power_monitor" pkg="cpr_indoornav_jackal" type="jackal_power_monitor" />
+</launch>

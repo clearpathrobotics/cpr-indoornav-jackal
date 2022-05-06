@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<launch>
+  <node pkg="cpr_indoornav_jackal" type="start_jackal_bridge" name="jackal_bridge_node" />
+</launch>

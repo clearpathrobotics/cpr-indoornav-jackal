@@ -1,0 +1,71 @@
+#!/usr/bin/env python
+
+import rospy
+
+from jackal_msgs.msg import Status
+from sensor_msgs.msg import BatteryState
+from std_msgs.msg import Header
+
+# Normal operational voltage of the Jackal batteries
+MAX_VOLTAGE=29.4
+MIN_VOLTAGE=22.4
+
+NaN = float('nan')
+
+def linear_rescale(x, old_min, old_max, new_min, new_max, clip=True):
+    if clip and x < old_min:
+        return new_min
+    elif clip and x > old_max:
+        return new_max
+
+    return float(x - old_min) / (old_max - old_min) * (new_max - new_min) + new_min
+
+def status_cb(data, node):
+    node.status_callback(data)
+
+class PowerStatusRelayNode:
+    def __init__(self):
+        rospy.init_node('jackal_power_monitor')
+
+    def start(self):
+        self.mcu_sub = rospy.Subscriber('/status', Status, status_cb, self)
+        self.battery_pub = rospy.Publisher('/export/rocksteady/bms/battery_status', BatteryState, queue_size=1)
+
+    def status_callback(self, data):
+        msg = BatteryState()
+
+        # set up the message header
+        msg.header = Header()
+        msg.header.stamp = rospy.Time.now()
+
+        # fill the rest of the pertinent payload
+        msg.present = True
+        msg.voltage = data.measured_battery
+        msg.percentage = linear_rescale(data.measured_battery, MIN_VOLTAGE, MAX_VOLTAGE, 0, 1)
+        msg.current = data.total_current
+        msg.power_supply_status = msg.POWER_SUPPLY_STATUS_DISCHARGING  # no built-in charging!
+        msg.power_supply_health = msg.POWER_SUPPLY_HEALTH_UNKNOWN
+        msg.power_supply_technology = msg.POWER_SUPPLY_TECHNOLOGY_UNKNOWN
+
+        # assume a single cell
+        msg.cell_voltage = [data.measured_battery]
+        msg.cell_temperature = [NaN]
+
+        # arbitrary
+        msg.location = 'internal'
+        msg.serial_number = ''
+
+        # measurements not supported by the Jackal MCU
+        msg.charge = NaN
+        msg.capacity = NaN
+        msg.design_capacity = NaN
+        msg.temperature = NaN
+
+
+        # publish the message
+        self.battery_pub.publish(msg)
+
+if __name__=='__main__':
+    node = PowerStatusRelayNode()
+    node.start()
+    rospy.spin()

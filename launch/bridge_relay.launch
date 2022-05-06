@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<launch>
+  <include file="$(find cpr_indoornav_jackal)/launch/include/relays.launch.xml" />
+  <include file="$(find cpr_indoornav_jackal)/launch/include/bridge.launch.xml" />
+</launch>

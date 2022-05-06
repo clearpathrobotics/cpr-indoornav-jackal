@@ -1,0 +1,60 @@
+jackal_api:
+  topics:
+    # motor control
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/cmd_vel
+      type: geometry_msgs/msg/Twist
+      queue_size: 1
+
+    # IMU sensors
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/imu/data
+      type: sensor_msgs/msg/Imu
+      queue_size: 1
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/gx5/imu/data
+      type: sensor_msgs/msg/Imu
+      queue_size: 1
+
+    # lidar sensors
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/front/scan
+      type: sensor_msgs/msg/LaserScan
+      queue_size: 1
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/rear/scan
+      type: sensor_msgs/msg/LaserScan
+      queue_size: 1
+    #-
+    #  topic: /$(env HOSTNAME_ROS_SANITIZED)/velodyne_points
+    #  type: sensor_msgs/msg/PointCloud
+    #  queue_size: 1
+
+    # GPS sensors
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/navsat/fix
+      type: sensor_msgs/msg/NavSatFix
+      queue_size: 1
+
+    # Battery, e-stop, safety status, wireless
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/battery_status
+      type: sensor_msgs/msg/BatteryState
+      queue_size: 1
+#    - # TODO: wireless_msgs doesn't appear to exist on Foxy (yet?)
+#      topic: /$(env HOSTNAME_ROS_SANITIZED)/wireless/connection
+#      type: wireless_msgs/msg/Connection
+#      queue_size: 1
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/wireless/connected
+      type: std_msgs/msg/Bool
+      queue_size: 1
+
+    # Game controller
+    -
+      topic: /$(env HOSTNAME_ROS_SANITIZED)/bluetooth_teleop/joy
+      type: sensor_msgs/msg/Joy
+      queue_size: 1
+
+  services_1_to_2: []
+  services_2_to_1: []
