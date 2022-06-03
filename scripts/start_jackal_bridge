@@ -28,13 +28,13 @@ fi
 
 # if the ros1_bridge package has been built from source it may be in a custom workspace
 # so source that too
-if [ -z "$BRIDGE_SETUP_PATH" ];
+if ! [ -z "$BRIDGE_SETUP_PATH" ];
 then
   source $BRIDGE_SETUP_PATH
 fi
 
 # set the ROS2 domain, other necessary envars
-export ROS_DOMAIN_ID=121
+export ROS_DOMAIN_ID=91
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export CYCLONEDDS_URI=file://$(catkin_find cpr_indoornav_base config/cyclone_dds.xml --first-only)
 
