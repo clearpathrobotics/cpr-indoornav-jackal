@@ -2,8 +2,8 @@
 Changelog for package cpr_indoornav_jackal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.2 (2022-07-28)
+------------------
 * Fix the python interpreter to force python3
 * Contributors: Chris Iverach-Brereton
 
