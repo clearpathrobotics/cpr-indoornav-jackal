@@ -2,6 +2,11 @@
 Changelog for package cpr_indoornav_jackal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix the python interpreter to force python3
+* Contributors: Chris Iverach-Brereton
+
 0.3.1 (2022-06-03)
 ------------------
 * Change the ROS1->2 bridge domain to 91
