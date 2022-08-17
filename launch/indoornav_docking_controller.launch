@@ -24,15 +24,16 @@ express permission of Clearpath Robotics.
   <!-- Navigation parameters path -->
   <arg name="navigation_params_dir" value="$(eval find('cpr_docking_' + arg('platform')) + '/$(arg platform)_gps_navigation/params/$(arg platform)_navigation')" />
 
+
   <!-- Enable the SICK_LMS 2D lidar (front if only one) -->
   <arg name="sick_lms" value="$(optenv JACKAL_LMS1XX_ENABLED false)" />
   <!-- Enable the rear SICK_LMS 2D lidar -->
   <arg name="rear_sick_lms" value="$(optenv JACKAL_LMS1XX_SECONDARY_ENABLED false)" />
 
   <!-- Enable the Hokuyo 2D lidar (front if only one) -->
-  <arg name="hokuyo" value="$(optenv JACKAL_UST10_ENABLED false)" />
+  <arg name="hokuyo" value="$(optenv JACKAL_UST10_ENABLED true)" />
   <!-- Enable the rear Hokuyo 2D lidar -->
-  <arg name="rear_hokuyo" value="$(optenv JACKAL_UST10_SECONDARY_ENABLED false)" />
+  <arg name="rear_hokuyo" value="$(optenv JACKAL_UST10_SECONDARY_ENABLED true)" />
 
   <!-- Run planning and control? -->
   <arg name="enable_control" default="true" />
