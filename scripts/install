@@ -85,10 +85,32 @@ def upgrade_ros_job(platform):
 
     j.install()
 
+def install_docking_job(platform):
+    jobname = 'docking'
+
+    pkg_name = 'cpr_indoornav_{0}'.format(platform)
+    launch_files = [
+        '{0}_docking.launch'.format(platform)
+    ]
+
+    j = robot_upstart.Job(name=jobname, workspace_setup=os.environ['ROBOT_SETUP'])
+    j.symlink = True
+    j.roslaunch_wait = True
+
+    for lf in launch_files:
+        j.add(package=pkg_name, filename='launch/{0}'.format(lf))
+
+    j.install()
+
+    os.system("sudo sed -i '/After/c After=cpr-indoornav.service' /lib/systemd/system/%s.service" % jobname)
+    os.system("sudo sed -i '/After/a PartOf=cpr-indoornav.service' /lib/systemd/system/%s.service" % jobname)
+
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-a','--ip-address', metavar='IP_ADDR', type=str, action='store', dest='ip_address', help='IP address of the IndoorNav backpack. Default: 10.252.252.1', default='10.252.252.1')
 parser.add_argument('-u','--username', metavar='USER', type=str, action='store', dest='username', help='Login name for the IndoorNav backpack. Default: administrator', default='administrator')
+parser.add_argument('-d','--docking', metavar='USER', type=bool, action='store', dest='docking', help='Enable/Disable docking for indoornav. Default: False', default=False)
 args = parser.parse_args()
 
 if getpass.getuser() == 'root':
@@ -100,4 +122,6 @@ remote_user = args.username
 local_user = getpass.getuser()
 
 install_indoornav_job('jackal')
+if args.docking:
+    install_docking_job('jackal')
 upgrade_ros_job('jackal')
