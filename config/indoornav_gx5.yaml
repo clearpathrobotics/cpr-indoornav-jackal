@@ -23,6 +23,10 @@ twist_mux:
     topic   : twist_marker_server/cmd_vel
     timeout : 0.5
     priority: 8
+  - name    : indoornav_web
+    topic   : manual/cmd_vel
+    timeout : 0.5
+    priority: 3
   - name    : external
     topic   : cmd_vel
     timeout : 0.5
