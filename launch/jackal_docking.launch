@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<launch>
+  <include file="$(find cpr_indoornav_base)/launch/start_indoornav_docking.launch">
+    <arg name="platform" value="jackal" />
+  </include>
+</launch>
