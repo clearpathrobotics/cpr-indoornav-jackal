@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>cpr_indoornav_jackal</name>
-  <version>0.3.2</version>
+  <version>0.3.3</version>
   <description>Additional packages and scripts for running IndoorNav on the Jackal</description>
 
   <maintainer email="civerachb@clearpathrobotics.com">Chris Iverach-Brereton</maintainer>

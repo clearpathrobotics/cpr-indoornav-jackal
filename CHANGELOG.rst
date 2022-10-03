@@ -2,8 +2,8 @@
 Changelog for package cpr_indoornav_jackal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.3 (2022-10-03)
+------------------
 * Add separate bridge params for GX5 vs UM7 setups
 * Add the web GUI input to the twist_mux
 * tune dock distance without actual receiver attached
