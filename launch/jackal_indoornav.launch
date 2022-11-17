@@ -4,6 +4,12 @@
     <include file="$(find cpr_indoornav_base)/launch/api_bridge.launch" />
   </group>
 
+  <group if="$(optenv INDOORNAV_ENABLE_DOCKING 0)">
+    <include file="$(find cpr_indoornav_base)/launch/indoornav_docking_controller.launch">
+      <arg name="platform" value="jackal" />
+    </include>
+  </group>
+
   <include file="$(find cpr_indoornav_base)/launch/start_indoornav_remote.launch">
     <arg name="platform" value="jackal" />
   </include>
