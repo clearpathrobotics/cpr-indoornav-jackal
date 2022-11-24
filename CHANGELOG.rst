@@ -2,6 +2,13 @@
 Changelog for package cpr_indoornav_jackal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Use a 30-sample rolling average for the battery percentage instead of single samples. On Jackal this equates to ~30s averages
+* Add a group for wireless charge docking if applicable
+* Reduce the upper limit for the full battery voltage to 28.8V. See OPG02-76
+* Contributors: Chris Iverach-Brereton
+
 0.3.3 (2022-10-03)
 ------------------
 * Add separate bridge params for GX5 vs UM7 setups
