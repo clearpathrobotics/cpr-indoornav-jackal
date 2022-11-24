@@ -2,8 +2,8 @@
 Changelog for package cpr_indoornav_jackal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.3.4 (2022-11-24)
+------------------
 * Use a 30-sample rolling average for the battery percentage instead of single samples. On Jackal this equates to ~30s averages
 * Add a group for wireless charge docking if applicable
 * Reduce the upper limit for the full battery voltage to 28.8V. See OPG02-76
