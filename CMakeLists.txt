@@ -13,6 +13,7 @@ install(PROGRAMS
   scripts/environment
   scripts/install
   scripts/jackal_power_monitor
+  scripts/jackal_safety_stop
   scripts/setup_docking
   scripts/start_jackal_bridge
 
