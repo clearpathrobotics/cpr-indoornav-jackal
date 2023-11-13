@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""Monitors /status and publishes to /platform/safety_stop
+"""
+
+import rospy
+from jackal_msgs.msg import Status
+from std_msgs.msg import Bool
+
+class JackalSafetyStopNode:
+    def on_status(self, msg):
+        self.safety_stop_pub.publish(not msg.drivers_active)
+
+    def run(self):
+        self.safety_stop_pub = rospy.Publisher("/platform/safety_stop", Bool, queue_size=1)
+        self.status_sub = rospy.Subscriber("/status", Status, self.on_status)
+        rospy.spin()
+
+def main():
+    rospy.init_node("jackal_safety_stop_node")
+    node = JackalSafetyStopNode()
+    node.run()
+
+if __name__=="__main__":
+    main()
