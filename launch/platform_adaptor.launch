@@ -5,6 +5,6 @@
   <node name="odom_filtered__relay" pkg="topic_tools" type="relay" args="/odometry/filtered /platform_odometry" />
   <node name="estop__relay" pkg="topic_tools" type="relay" args="/platform/safety_stop /platform/emergency_stop" />
 
-  <node name="jackal_twist_stamped_node" type="jackal_twist_stamped" pkg="cpr_indoornav_jackal" />
+  <node name="twist_republish_node" type="jackal_twist_repub" pkg="cpr_indoornav_jackal" />
 
 </launch>

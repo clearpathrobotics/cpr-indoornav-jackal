@@ -6,7 +6,7 @@ import rospy
 from std_msgs.msg import Header
 from geometry_msgs.msg import Twist, TwistStamped
 
-class JackalTwistStampedNode:
+class TwistRepublisherNode:
     def velCallback(self, msg):
         twist_stamped_msg = TwistStamped()
         twist_stamped_msg.header.stamp = rospy.Time.now()
@@ -21,8 +21,8 @@ class JackalTwistStampedNode:
         rospy.spin()
 
 def main():
-    rospy.init_node("jackal_twist_stamped_node")
-    node = JackalTwistStampedNode()
+    rospy.init_node("twist_republish_node")
+    node = TwistRepublisherNode()
     node.run()
 
 if __name__=="__main__":

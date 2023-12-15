@@ -14,6 +14,7 @@ install(PROGRAMS
   scripts/install
   scripts/jackal_power_monitor
   scripts/jackal_safety_stop
+  scripts/jackal_twist_repub
   scripts/setup_docking
   scripts/start_jackal_bridge
 
