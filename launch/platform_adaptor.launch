@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node name="jackal_odom__relay" pkg="topic_tools" type="relay" args="/jackal_velocity_controller/odom /platform_control/odom" />
+  <node name="odom_filtered__relay" pkg="topic_tools" type="relay" args="/odometry/filtered /platform_odometry" />
+  <node name="estop__relay" pkg="topic_tools" type="relay" args="/platform/safety_stop /platform/emergency_stop" />
+
+  <node name="twist_republish_node" type="jackal_twist_repub" pkg="cpr_indoornav_jackal" />
+
+</launch>
