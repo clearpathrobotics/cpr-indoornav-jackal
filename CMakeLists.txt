@@ -14,7 +14,6 @@ install(PROGRAMS
   scripts/install
   scripts/jackal_power_monitor
   scripts/jackal_safety_stop
-  scripts/setup_docking
   scripts/start_jackal_bridge
 
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

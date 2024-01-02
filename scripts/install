@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This script installs the cpr-indoornav.service (and optionally docking.service) systemd jobs, used for
+This script installs the cpr-indoornav.service systemd jobs, used for
 starting IndoorNav.
 """
 
@@ -16,7 +16,6 @@ from catkin.find_in_workspaces import find_in_workspaces
 parser = argparse.ArgumentParser()
 parser.add_argument('-a','--ip-address', metavar='IP_ADDR', type=str, action='store', dest='ip_address', help='IP address of the IndoorNav backpack. Default: 10.252.252.1', default='10.252.252.1')
 parser.add_argument('-u','--username', metavar='USER', type=str, action='store', dest='username', help='Login name for the IndoorNav backpack. Default: administrator', default='administrator')
-parser.add_argument('-d','--docking', metavar='USER', type=bool, action='store', dest='docking', help='Enable/Disable docking for indoornav. Default: False', default=False)
 args = parser.parse_args()
 
 if getpass.getuser() == 'root':
@@ -28,5 +27,3 @@ remote_user = args.username
 local_user = getpass.getuser()
 
 cpr_indoornav_base.installation.create_indoornav_service('jackal', local_user, remote_user, backpack_ip)
-if args.docking:
-    cpr_indoornav_base.installation.create_docking_service('jackal')

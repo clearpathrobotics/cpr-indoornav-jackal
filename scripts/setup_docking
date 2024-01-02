@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# update /etc/ros/setup.bash with the additional envars
-echo "export ODOM_TOPIC=odometry/filtered" | sudo tee -a /etc/ros/setup.bash
-echo "export DOCK_DISTANCE=-0.06" | sudo tee -a /etc/ros/setup.bash
-echo "export UNDOCK_DISTANCE=2.0" | sudo tee -a /etc/ros/setup.bash
