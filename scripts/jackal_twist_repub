@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Republishes platform velocity topic to /platform_control/cmd_vel as a TwistStamped
+"""
+
+import rospy
+from std_msgs.msg import Header
+from geometry_msgs.msg import Twist, TwistStamped
+
+class TwistRepublisherNode:
+    def velCallback(self, msg):
+        twist_stamped_msg = TwistStamped()
+        twist_stamped_msg.header.stamp = rospy.Time.now()
+        twist_stamped_msg.header.frame_id = "base_link"
+        twist_stamped_msg.twist = msg
+        self.twist_stamped_pub.publish(twist_stamped_msg)
+
+    def run(self):
+        self.twist_stamped_pub = rospy.Publisher("/platform_control/cmd_vel_stamped", TwistStamped, queue_size=1)
+        self.twist_sub = rospy.Subscriber("/platform_control/cmd_vel", Twist, self.velCallback)
+#        self.twist_sub = rospy.Subscriber("/jackal_velocity_controller/cmd_vel", Twist, self.velCallback)
+        rospy.spin()
+
+def main():
+    rospy.init_node("twist_republish_node")
+    node = TwistRepublisherNode()
+    node.run()
+
+if __name__=="__main__":
+    main()

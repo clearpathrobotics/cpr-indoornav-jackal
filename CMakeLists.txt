@@ -13,7 +13,8 @@ install(PROGRAMS
   scripts/environment
   scripts/install
   scripts/jackal_power_monitor
-  scripts/setup_docking
+  scripts/jackal_safety_stop
+  scripts/jackal_twist_repub
   scripts/start_jackal_bridge
 
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
