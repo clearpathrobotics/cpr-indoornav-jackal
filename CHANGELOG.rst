@@ -2,6 +2,11 @@
 Changelog for package cpr_indoornav_jackal
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update to use Otto's 2.26 release
+* Contributors: Chris Iverach-Brereton, José Mastrangelo
+
 0.3.4 (2022-11-24)
 ------------------
 * Use a 30-sample rolling average for the battery percentage instead of single samples. On Jackal this equates to ~30s averages
