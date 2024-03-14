@@ -10,10 +10,13 @@ export JACKAL_REAR_LASER_HOST=192.168.131.21
 
 export JACKAL_URDF_EXTRAS=$(catkin_find cpr_indoornav_jackal urdf/indoornav_jackal.urdf.xacro --first-only)
 
-export JACKAL_CONTROL_EXTRAS=1
-if [ -z "$INDOORNAV_IMU_GX5" ] || [ "$INDOORNAV_IMU_GX5" = "0" ];
+if [ -z "$OUTDOORNAV_ENABLED" ] || [[ "$OUTDOORNAV_ENABLED" == "false" ]];
 then
-  export JACKAL_CONTROL_EXTRAS_PATH=$(catkin_find cpr_indoornav_jackal config/indoornav_um7.yaml --first-only)
-else
-  export JACKAL_CONTROL_EXTRAS_PATH=$(catkin_find cpr_indoornav_jackal config/indoornav_gx5.yaml --first-only)
+  export JACKAL_CONTROL_EXTRAS=1
+  if [ -z "$INDOORNAV_IMU_GX5" ] || [ "$INDOORNAV_IMU_GX5" = "0" ];
+  then
+    export JACKAL_CONTROL_EXTRAS_PATH=$(catkin_find cpr_indoornav_jackal config/indoornav_um7.yaml --first-only)
+  else
+    export JACKAL_CONTROL_EXTRAS_PATH=$(catkin_find cpr_indoornav_jackal config/indoornav_gx5.yaml --first-only)
+  fi
 fi
