@@ -26,11 +26,11 @@ twist_mux:
   - name    : indoornav_web
     topic   : manual/cmd_vel
     timeout : 0.5
-    priority: 3
+    priority: 2
   - name    : external
     topic   : cmd_vel
     timeout : 0.5
-    priority: 2
+    priority: 3
   - name    : ros2
     topic   : /$(env HOSTNAME_ROS_SANITIZED)/cmd_vel
     timeout : 0.5
